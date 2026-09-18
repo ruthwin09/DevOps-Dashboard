@@ -1,0 +1,26 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+
+# Environment files (examples remain tracked)
+.env
+.env.*
+!.env.example
+
+# Prisma generated client
+database/generated/
+
+# IDE and operating system files
+.vscode/
+.idea/
+*.swp
+*.suo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+*.tsbuildinfo

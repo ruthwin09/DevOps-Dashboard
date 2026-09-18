@@ -1,0 +1,34 @@
+{
+  "name": "devops-command-center",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A unified command center for DevOps operations.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,green \"npm run dev -w @devops-command-center/web\" \"npm run dev -w @devops-command-center/api\"",
+    "dev:web": "npm run dev -w @devops-command-center/web",
+    "dev:api": "npm run dev -w @devops-command-center/api",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck -w @devops-command-center/shared && npm run typecheck -w @devops-command-center/api && npm run typecheck -w @devops-command-center/web",
+    "build": "npm run build -w @devops-command-center/shared && npm run build -w @devops-command-center/api && npm run build -w @devops-command-center/web",
+    "prisma:generate": "prisma generate --schema database/prisma/schema.prisma",
+    "prisma:validate": "prisma validate --schema database/prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.5.2",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "prisma": "^6.16.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.44.1"
+  }
+}
