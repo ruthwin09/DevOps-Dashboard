@@ -62,10 +62,10 @@ export function Sidebar({ isOpen, onClose, onToggle }: SidebarProps) {
             </NavLink>
           ))}
         </nav>
-        <div className="mt-auto rounded-xl border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400">
-          Foundation phase
+        <div className="mt-auto border border-slate-800 bg-slate-900/60 p-3 text-xs text-slate-400">
+          Platform status
           <br />
-          <span className="text-slate-500">Operational data coming soon.</span>
+          <span className="text-emerald-300">All systems operational</span>
         </div>
       </aside>
     </>

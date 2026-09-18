@@ -1,43 +1,47 @@
-import { Activity, CheckCircle2, Clock3, ShieldCheck } from 'lucide-react';
-
-const cards = [
-  { label: 'Services', value: '—', detail: 'Connect integrations to begin', icon: Activity },
-  { label: 'Deployments', value: '—', detail: 'No delivery data connected', icon: CheckCircle2 },
-  { label: 'Active incidents', value: '—', detail: 'Incident module planned', icon: Clock3 },
-  { label: 'Security posture', value: '—', detail: 'Scanning phase planned', icon: ShieldCheck },
-];
+import { AlertSummary } from '../../components/dashboard/alert-summary';
+import { DeploymentTable } from '../../components/dashboard/deployment-table';
+import { InfrastructureSummary } from '../../components/dashboard/infrastructure-summary';
+import { MetricCard } from '../../components/dashboard/metric-card';
+import { RecentActivity } from '../../components/dashboard/recent-activity';
+import { ResourceChart } from '../../components/dashboard/resource-chart';
+import { SystemHealth } from '../../components/dashboard/system-health';
+import { LoadingState } from '../../components/loading-state';
+import { useDashboardOverview } from '../../hooks/use-dashboard-overview';
 
 export function DashboardOverview() {
+  const dashboard = useDashboardOverview();
+  if (!dashboard) return <LoadingState />;
   return (
     <div className="space-y-6">
-      <section>
-        <p className="text-sm text-slate-400">
-          A single view of your delivery and operations lifecycle.
+      <section className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="text-sm text-slate-400">
+            Live system health and delivery signals for your engineering platform.
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-white">
+            Good afternoon, operator.
+          </h2>
+        </div>
+        <p className="flex items-center gap-2 text-sm text-emerald-300">
+          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          All core systems operational
         </p>
-        <h2 className="mt-2 text-3xl font-semibold text-white">Good afternoon, operator.</h2>
       </section>
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {cards.map(({ label, value, detail, icon: Icon }) => (
-          <article key={label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-            <div className="mb-7 flex items-center justify-between">
-              <span className="text-sm text-slate-400">{label}</span>
-              <Icon size={18} className="text-sky-300" />
-            </div>
-            <p className="text-3xl font-semibold text-white">{value}</p>
-            <p className="mt-2 text-xs text-slate-500">{detail}</p>
-          </article>
+      <section className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
+        {dashboard.metrics.map((metric) => (
+          <MetricCard key={metric.id} metric={metric} />
         ))}
       </section>
-      <section className="rounded-xl border border-dashed border-slate-700 bg-slate-900/30 p-8">
-        <h3 className="font-medium text-slate-100">
-          Your command center is ready for integrations
-        </h3>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
-          This foundation provides the application shell and API health service. Pipeline,
-          deployment, Kubernetes, monitoring, and security data are intentionally deferred to later
-          phases.
-        </p>
+      <section className="grid gap-6 xl:grid-cols-[minmax(0,1.65fr)_minmax(340px,0.85fr)]">
+        <ResourceChart usage={dashboard.resourceUsage} />
+        <SystemHealth healthChecks={dashboard.healthChecks} />
       </section>
+      <DeploymentTable deployments={dashboard.deployments} />
+      <section className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
+        <RecentActivity activities={dashboard.activities} />
+        <AlertSummary alerts={dashboard.alerts} />
+      </section>
+      <InfrastructureSummary infrastructure={dashboard.infrastructure} />
     </div>
   );
 }

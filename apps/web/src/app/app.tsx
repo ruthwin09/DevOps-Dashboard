@@ -10,7 +10,7 @@ import { PlaceholderPage } from '../pages/placeholder-page';
 export function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-[#080d18] text-slate-100">
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -18,7 +18,7 @@ export function App() {
       />
       <div className="lg:pl-72">
         <Topbar />
-        <main className="mx-auto max-w-7xl p-6 lg:p-8">
+        <main className="mx-auto max-w-[1600px] p-5 lg:p-8">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             {navigationItems

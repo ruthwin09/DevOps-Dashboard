@@ -12,7 +12,7 @@
     'Segoe UI',
     sans-serif;
   color: #e2e8f0;
-  background: #020617;
+  background: #080d18;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -30,4 +30,12 @@ body {
 button,
 input {
   font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
 }

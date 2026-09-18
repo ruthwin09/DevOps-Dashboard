@@ -14,7 +14,7 @@ import {
 import type { NavigationEntry } from '../types/navigation';
 
 export const navigationItems: NavigationEntry[] = [
-  { label: 'Dashboard', path: '/', icon: Gauge },
+  { label: 'Overview', path: '/', icon: Gauge },
   { label: 'Pipelines', path: '/pipelines', icon: GitBranch },
   { label: 'Deployments', path: '/deployments', icon: Activity },
   { label: 'Containers', path: '/containers', icon: Container },
