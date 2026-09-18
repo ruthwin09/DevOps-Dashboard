@@ -5,12 +5,17 @@ import { MetricCard } from '../../components/dashboard/metric-card';
 import { RecentActivity } from '../../components/dashboard/recent-activity';
 import { ResourceChart } from '../../components/dashboard/resource-chart';
 import { SystemHealth } from '../../components/dashboard/system-health';
+import { ErrorState } from '../../components/error-state';
 import { LoadingState } from '../../components/loading-state';
 import { useDashboardOverview } from '../../hooks/use-dashboard-overview';
 
 export function DashboardOverview() {
-  const dashboard = useDashboardOverview();
+  const { data: dashboard, isLoading, error } = useDashboardOverview();
+
+  if (isLoading) return <LoadingState />;
+  if (error) return <ErrorState message={error.message} />;
   if (!dashboard) return <LoadingState />;
+
   return (
     <div className="space-y-6">
       <section className="flex flex-wrap items-end justify-between gap-4">
@@ -45,3 +50,4 @@ export function DashboardOverview() {
     </div>
   );
 }
+

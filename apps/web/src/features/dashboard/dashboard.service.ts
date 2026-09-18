@@ -1,6 +1,7 @@
-import { dashboardMock } from './data/dashboard.mock';
-import type { DashboardOverviewData } from './types/dashboard.types';
+import type { DashboardOverviewData } from '@devops-command-center/shared';
+import { getDashboardOverview as fetchDashboardOverview } from '../../services/api';
 
 export async function getDashboardOverview(): Promise<DashboardOverviewData> {
-  return dashboardMock;
+  return fetchDashboardOverview();
 }
+
